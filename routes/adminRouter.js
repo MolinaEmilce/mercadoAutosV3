@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const upload = require('../middlewares/multerAutos'); //subida de archivos configuracion
-
-const {register,login,processLogin,processRegister,index,carList,carEdit,carCreate,carDelete,carUpdate,carStore} = require('../controllers/adminController');
-
+const upload = require('../middlewares/subidaImagenes'); //subida de archivos configuracion
+const {register,login,processLogin,processRegister,index,carList,carEdit,carCreate,carDelete,carUpdate,carStore, listAdmins, profileAdmins} = require('../controllers/adminController');
+const registerAdminValidator = require('../validations/registerAdminValidator');
 
 
 
@@ -13,12 +12,13 @@ router.get('/',index);
 
 //ENTIDAD ADMINISTRADORES
 router.get('/register',register); //trae renderiza el formulario vacio
-router.post('/register',processRegister); //ejecuta procesa la informacion del formulario
+router.post('/register',registerAdminValidator, processRegister); //ejecuta procesa la informacion del formulario
 
 router.get('/login',login);
 router.post('/login',processLogin);
 
-
+router.get('/list',listAdmins);
+router.get('/profile/:id', profileAdmins);
 
 
 

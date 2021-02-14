@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path'); //indica que estamos en  la rutas principal
 const bcrypt = require('bcrypt'); // inidica el hashing, encriptar las contraseñas
+const {check, validationResult, body} = require('express-validator');
+
+
+
 
 const{getAutos,setAutos}= require(path.join('..','data','autos')); //hay dos puntos xq estamos dentro de controller, signficia que salimos y ya estamos en la carpeta principal
 const {getAdmins,setAdmins} = require(path.join('..','data','admins'));
@@ -17,45 +21,49 @@ module.exports = {
     },
     //capturamos los datos que vienen por el formulario
     processRegister : (req,res)=>{
-    //name de los inputs, traemos los datos del formulario
-    const {username,pass} = req.body
+    //Usando  express-validator .............
+    const errores = validationResult(req);  //devuelve el resultado del middleware que pusimos  en la tuta mediante los checks()
+    //mapped() = crea propiedades con los mismos nombres del campo input con sus diferentes objetos dentro
 
-    //--------------VALIDACIONES ....
-    //dato :  si la varible esta vacia es false, si tiene datos es true
-    if(!username || !pass){ //si los campos estan vacios
-        return res.redirect('/admin/register'); //volvemos a la misma pagina, no hace nada
-    }
-
-    //si el usuario esta repetido mande un mensaje, de lo contrario que ya lo cree y sigue con los siguientes pasos
-    let result = admins.find(cadaAdmin => cadaAdmin.username.toLowerCase() === username.toLowerCase().trim());
-    if(result){
+    if(!errores.isEmpty()){
         return res.render('admin/register',{
-            error : "Usuario ya en uso"
-        })
-    }
+            //si existe errores, se le almacena una propiedad errors, que como dato tiene un array CON OBJTOS LITERALES
+            errores : errores.mapped(), //accedemos a la propiedad errors de la variable errores
+            old : req.body //para que cuando haya errores no me borre todo los campos, presistencia de datos
+        });
+    }else{
+
+        //name de los inputs, traemos los datos del formulario
+        const {username,pass} = req.body;
+
+        //--------------VALIDACIONES ....  (tambien se instala el modulo express-validator atraves de npm)
+        //dato :  si la varible esta vacia es false, si tiene datos es true
+        // if(!username || !pass){ //si los campos estan vacios
+        //    return res.redirect('/admin/register'); //volvemos a la misma pagina, no hace nada
+         //  }
 
 
-    let lastID = 0;
-    admins.forEach(cadaAdmin=>{
-        //si cumple la condicion, el lastID puesto  se cambia y tendra como valor el id actual que estamos recorriendo
-        if(cadaAdmin.id > lastID){
-            lastID = cadaAdmin.id;
+        let lastID = 0;
+        admins.forEach(cadaAdmin=>{
+            //si cumple la condicion, el lastID puesto  se cambia y tendra como valor el id actual que estamos recorriendo
+            if(cadaAdmin.id > lastID){
+                lastID = cadaAdmin.id;
+            }
+        });
+
+        //encriptar contraseña
+        //      (lo que va encrpitar, cantidad);
+        let passHash = bcrypt.hashSync(pass.trim(),12);
+
+        const newAdmin = {
+            id : +lastID + 1,
+            username : username.trim(), //dato del form,  no le asignamos valor, porque tiene el mismo nombre y automaticamente se almacena 
+            pass : passHash // tambien lo mismo, trae el dato del form pero en este caso la contraseña encryptada
         }
-    });
-
-    //encriptar contraseña
-    //      (lo que va encrpitar, cantidad);
-    let passHash = bcrypt.hashSync(pass.trim(),12);
-
-    const newAdmin = {
-        id : +lastID + 1,
-        username : username.trim(), //dato del form,  no le asignamos valor, porque tiene el mismo nombre y automaticamente se almacena 
-        pass : passHash // tambien lo mismo, trae el dato del form pero en este caso la contraseña encryptada
+        admins.push(newAdmin);
+        setAdmins(admins);
+        res.redirect('/admin/login');
     }
-    admins.push(newAdmin);
-    setAdmins(admins);
-    res.redirect('/admin/login');
-
 
 
     },
@@ -81,8 +89,13 @@ module.exports = {
 
 
     }, //--------------------------------------
-
-
+    listAdmins : (req,res)=>{ //lista de perfiles
+        res.render('admin/admins', {admins}); //trae el json de los administradores.
+    },
+    profileAdmins : (req,res)=>{ //atraves del buscador, busca el admin
+        const admin = admins.find(cadaAdmin => cadaAdmin.id === +req.params.id);
+        res.render('admin/profile',{admin});
+    },
     index : (req,res)=>{
         res.render('admin/index');
     },

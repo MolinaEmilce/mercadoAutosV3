@@ -23,5 +23,25 @@
     "id": 6,
     "username": "luis",
     "pass": "$2b$12$UgeGMNYTFflhZJ/xxC55Tu4e0XCOgKkwr5GHGLR2Vc4iOuL0F4v8e"
+  },
+  {
+    "id": 7,
+    "username": "195050",
+    "pass": "$2b$12$5Hi29x6SveEOAlRVyrbxIOf2auN4eCSl/BxnBs9oNz2TiYLpnH88G"
+  },
+  {
+    "id": 8,
+    "username": "42022117",
+    "pass": "$2b$12$k5xaYhoflP5UNs55UNI58eMXbe5HN1mIkU2VwOmhVMuoW1wLNHDsa"
+  },
+  {
+    "id": 9,
+    "username": "emilce12",
+    "pass": "$2b$12$uG1JTH8NhA6wC.7SF5xCjupf./hBpOdcSDeMVRfJmEhECRkgXUBaO"
+  },
+  {
+    "id": 10,
+    "username": "emilce0",
+    "pass": "$2b$12$.p9yHCT7kKPpAuw9uY35pOxrJlS.hlAnMQ142GjuB0iuZdSg3iWd2"
   }
 ]

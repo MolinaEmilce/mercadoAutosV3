@@ -12,7 +12,7 @@ const port = 3500;
 //confiragamos el metodo override(delete y put) que instalamos por npm 
 const methodOverride = require('method-override');
 
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method')); //metodo para las configuraciones de los metodos (delete put path, que no soporta todos los navegadores)
 
 /* ---IDE BOARD-- ACCESIBLE A TODAS LAS VISTA(img,video,etc), CADA VEZ QUE SE EJECUTA PASA X ACA, */
 //                      (recursos estaticos)

@@ -10,14 +10,18 @@
                     <h2 class="text-center my-5">Register</h2>
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-floating mb-3">
-                            <input type="text"  class="form-control" id="floatingInput" placeholder="User name" name="username">
+                            <!-- persistencia de datos -->
+                            <input type="text" value="<%= (typeof old != 'undefined' && old.username) ? old.username : ""  %> " class="form-control" id="floatingInput" placeholder="User name" name="username">
                             <label for="floatingInput"  >User name</label>
+                            <!-- mensaje de error  -->
+                            <span class="text-danger"><%= (typeof errores != 'undefined' && errores.username) ? errores.username.msg : "" %>  </span>
                           </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-floating">
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="pass" >
                             <label for="floatingPassword">Password</label>
+                            <span class="text-danger"><%= (typeof errores != 'undefined' && errores.pass) ? errores.pass.msg : "" %>  </span>
                           </div>
                     </div>
                     <div class="col-12 col-md-8 text-center mt-5">

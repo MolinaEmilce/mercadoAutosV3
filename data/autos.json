@@ -109,5 +109,13 @@
     "color": "azul",
     "anio": "2011",
     "img": "img-1613276467226.png"
+  },
+  {
+    "id": 16,
+    "marca": "fiat",
+    "modelo": "juli",
+    "color": "negro",
+    "anio": "2011",
+    "img": "img-autos-1613334039763.gif"
   }
 ]

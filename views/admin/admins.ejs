@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head') %> 
+<body>
+    <%- include('./partials/header') %> 
+
+    <main>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">username</th>
+                <th scope="col">pass</th>
+              </tr>
+            </thead>
+            <tbody>
+             <% admins.forEach(cadaAdmin => { %>
+              <tr>
+                <th scope="row"><%= cadaAdmin.id %> </th>
+                <td><%= cadaAdmin.username %> </td>
+                <td><%= cadaAdmin.pass %> </td>
+                <td><a href="/admin/profile/<%= cadaAdmin.id %>" class="btn btn-primary">Editar</a></td>
+              </tr>
+             <% }); %>
+            </tbody>
+          </table>
+    </main>
+    
+    <%- include('./partials/footer') %> 
+</body>
+</html>
