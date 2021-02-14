@@ -1,4 +1,4 @@
-
+const fs = require('fs');
 const path = require('path'); //indica que estamos en  la rutas principal
 const bcrypt = require('bcrypt'); // inidica el hashing, encriptar las contraseñas
 
@@ -19,6 +19,21 @@ module.exports = {
     processRegister : (req,res)=>{
     //name de los inputs, traemos los datos del formulario
     const {username,pass} = req.body
+
+    //--------------VALIDACIONES ....
+    //dato :  si la varible esta vacia es false, si tiene datos es true
+    if(!username || !pass){ //si los campos estan vacios
+        return res.redirect('/admin/register'); //volvemos a la misma pagina, no hace nada
+    }
+
+    //si el usuario esta repetido mande un mensaje, de lo contrario que ya lo cree y sigue con los siguientes pasos
+    let result = admins.find(cadaAdmin => cadaAdmin.username.toLowerCase() === username.toLowerCase().trim());
+    if(result){
+        return res.render('admin/register',{
+            error : "Usuario ya en uso"
+        })
+    }
+
 
     let lastID = 0;
     admins.forEach(cadaAdmin=>{
@@ -79,13 +94,15 @@ module.exports = {
     carCreate : (req,res)=>{
         res.render('admin/carCreate');
     },
-    carStore : (req,res)=>{
+    carStore : (req,res,next)=>{
+     res.send(req.files);
        let lastID = 1;
        autos.forEach(cadaAuto => {
            if(cadaAuto.id > lastID){
                lastID = cadaAuto.id //La variable creada va a cambiar si el id del json es mayor a su valor
            }
        });
+
        //captura todos las propiedades con los valores del json creandolas en variables
         const {marca,modelo,color,anio,img} = req.body
        const auto = {
@@ -95,7 +112,7 @@ module.exports = {
            modelo,
            color,
            anio,
-           img
+           img : req.files[0].filename //PARA QUE SE GUARDE EN EL JSON, es decir guarda el nombre de la imagen que configuramos en la ruta con el multer 
        }
     autos.push(auto); //se agrega al json parseado
     setAutos(autos); //sobreescribe el json , viene de la carpeta data autos.js
@@ -131,6 +148,10 @@ module.exports = {
     carDelete : (req,res)=>{
       autos.forEach(cadaAuto=>{
           if(cadaAuto.id === +req.params.id){//si coincide con el id
+          //PARA QUE TAMBIEN SE ELIMINEN LOS ARCHIVOS SUBIDOS EXTERNOS DEL JSON
+                if(fs.existsSync(path.join('public','images','autos',cadaAuto.img))){ //existsSync: nos permite saber si el archivo existe o no
+                fs.unlinkSync(path.join('public','images','autos',cadaAuto.img)); //se aplica al link 
+                }
     //se va aguardar la posicion =  del archivo json parseado busca el auto especifico que cumple la condicion
             var aEliminar = autos.indexOf(cadaAuto);//en  el auto especifica nos busca su posicion
               autos.splice(aEliminar,1); //con la posicion encontrada lo elimina en l archivo json parseado

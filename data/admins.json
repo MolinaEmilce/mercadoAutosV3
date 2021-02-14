@@ -1,10 +1,5 @@
 [
   {
-    "id": 1,
-    "username": "emi",
-    "pass": "123"
-  },
-  {
     "id": 2,
     "username": "ANKLA",
     "pass": "$2b$12$JNzxJhZtSe4LUmWrg/FTB.GBRBTsQ7myhNles7bB4CaW4D7RB5H2."
@@ -13,5 +8,20 @@
     "id": 3,
     "username": "emilce",
     "pass": "$2b$12$TzBxAt5cksThA8V0iJKLqe3DN5rl/2Pjfx91k7cqe1rwkuxwhDX7W"
+  },
+  {
+    "id": 4,
+    "username": "jose",
+    "pass": "$2b$12$WaLzI61NroDOsZ.4r/BfHuIjafWBkspxcKXb32zbGtz6y8ev35PdS"
+  },
+  {
+    "id": 5,
+    "username": "julian",
+    "pass": "$2b$12$b4h8.H.yrF4mfcMHouWCE.pSfTYeGejsKAUTvK5nydc2mSCq53cIO"
+  },
+  {
+    "id": 6,
+    "username": "luis",
+    "pass": "$2b$12$UgeGMNYTFflhZJ/xxC55Tu4e0XCOgKkwr5GHGLR2Vc4iOuL0F4v8e"
   }
 ]

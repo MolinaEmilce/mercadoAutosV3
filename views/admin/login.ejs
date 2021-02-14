@@ -23,19 +23,20 @@
                     <div class="col-12 col-md-8 text-center mt-5">
                         <button type="submit" class="btn btn-primary">INICIAR SESION</button>
 
+                        <p class="mt-4">¿No estas registrado? <a href="/admin/register">Registrate</a> </p>
                     </div>
-<!-- mensajes de login -->
-                    <!-- si el error es distinto a undefined, es decir existe un error y hay valor dentro de ello -->
-                    <% if(typeof error != 'undefined'){ %> 
-                    <div class="alert-danger">
-                        <span><%= error %></span>
-                    </div>
-                    <% } %>
+                    
+                <!-- mensajes de login -->
                     <div class="col-12 col-md-8">
-                            <div class="alert alert-danger mt-5">
-                                <span> </span>
-                            </div>
+                        <!-- si el error es distinto a undefined, es decir existe un error y hay valor dentro de ello -->
+                    <% if(typeof error != 'undefined'){ %> 
+                        <div class="alert alert-danger mt-5">
+                            <span><%= error %></span>
+                        </div>
+                    <% } %>    
                     </div>
+
+
                 </div>
             </div>
         </form>

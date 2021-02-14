@@ -10,8 +10,8 @@
                     <h2 class="text-center my-5">Register</h2>
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="User name" name="username">
-                            <label for="floatingInput">User name</label>
+                            <input type="text"  class="form-control" id="floatingInput" placeholder="User name" name="username">
+                            <label for="floatingInput"  >User name</label>
                           </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
@@ -25,11 +25,18 @@
                         <p class="mt-4">¿Estás registrado? <a href="/admin/login">Inicia sesión</a></p>
 
                     </div>
+                    <!-- mensaje de avisos -->
+                    
                     <div class="col-12 col-md-8">
-                            <div class="alert alert-danger mt-5">
-                                <span> </span>
-                            </div>
+                           <!-- si el error es distinto a undefined, es decir existe un error y hay valor dentro de ello -->
+                    <% if(typeof error != 'undefined'){ %> 
+                        <div class="alert alert-danger mt-5">
+                            <span><%= error %></span>
+                        </div>
+                    <% } %>
                     </div>
+
+
                 </div>
             </div>
         </form>

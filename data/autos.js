@@ -11,7 +11,7 @@ module.exports = {
     },
     setAutos : (data) =>{//setea el json, lo sobreescribe al json
          //se convierte en json y se escribe en el json
-        fs.writeFileSync(autos_db,JSON.stringify(autos),'utf-8');
+        fs.writeFileSync(autos_db,JSON.stringify(data,null,2),'utf-8');
     
     }
 

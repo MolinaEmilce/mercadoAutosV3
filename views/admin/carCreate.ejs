@@ -4,7 +4,8 @@
 <body>
     <%- include('./partials/header')  %> 
     <main class="container">
-        <form action="/admin/autos/store" method="POST">
+        <form action="/admin/autos/store" method="POST" enctype="multipart/form-data"> <!-- se le agrega el enctype cuando usamos la subida de archivos externos -->
+          <!-- PERO OJO! no solo con configurar el formulario funcionara, hay que instalar un modulo que es MULTER, que nos permite procesar y almacenar los archivos  intermedios, procesos intermedios -->
           <h3>Agregar</h3>
           <hr>
           <div class="row">
@@ -33,9 +34,8 @@
               </div>
             </div>
             <div class="col-lg-6">
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="imagen" placeholder="imagen" name="img">
-                <label for="imagen">Imagen</label>
+              <div> <!-- SUBIDA DE ARCHIVOS -->
+                <input class="form-control form-control-lg" name="img" id="formFileLg" type="file">
               </div>
             </div>
           </div>
