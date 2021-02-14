@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head')  %> 
+<body>
+
+    <main>
+        <form action="" method="POST">
+            <div class="container">
+                <div class="row justify-content-center mt-5">
+                    <h2 class="text-center my-5">LOGIN</h2>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="User name" name="username">
+                            <label for="floatingInput">User name</label>
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="pass" >
+                            <label for="floatingPassword">Password</label>
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-8 text-center mt-5">
+                        <button type="submit" class="btn btn-primary">INICIAR SESION</button>
+
+                    </div>
+<!-- mensajes de login -->
+                    <!-- si el error es distinto a undefined, es decir existe un error y hay valor dentro de ello -->
+                    <% if(typeof error != 'undefined'){ %> 
+                    <div class="alert-danger">
+                        <span><%= error %></span>
+                    </div>
+                    <% } %>
+                    <div class="col-12 col-md-8">
+                            <div class="alert alert-danger mt-5">
+                                <span> </span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <%- include('./partials/footer')  %> 
+
+</body>
+</html>

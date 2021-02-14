@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "username": "emi",
+    "pass": "123"
+  },
+  {
+    "id": 2,
+    "username": "ANKLA",
+    "pass": "$2b$12$JNzxJhZtSe4LUmWrg/FTB.GBRBTsQ7myhNles7bB4CaW4D7RB5H2."
+  },
+  {
+    "id": 3,
+    "username": "emilce",
+    "pass": "$2b$12$TzBxAt5cksThA8V0iJKLqe3DN5rl/2Pjfx91k7cqe1rwkuxwhDX7W"
+  }
+]
